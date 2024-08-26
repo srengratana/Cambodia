@@ -1,5 +1,5 @@
 {
-    "_T1": {
+    "_TO_thd1": {
         "long_name": "Turnover threshold1",
         "description": "Turnover threshold to categorize companies by size",
         "itr_ref": "Tax Law",
@@ -24,7 +24,7 @@
         "out_of_range_maxmsg": "",
         "out_of_range_action": "stop"
     },
-    "_T2": {
+    "_TO_thd2": {
         "long_name": "Turnover threshold2",
         "description": "Turnover threshold to categorize companies by size",
         "itr_ref": "Tax Law",
@@ -49,7 +49,7 @@
         "out_of_range_maxmsg": "",
         "out_of_range_action": "stop"
     },
-      "_T3": {
+      "_TO_thd3": {
         "long_name": "Turnover threshold3",
         "description": "Turnover threshold to categorize companies by size",
         "itr_ref": "Tax Law",
@@ -74,7 +74,7 @@
         "out_of_range_maxmsg": "",
         "out_of_range_action": "stop"
     },
-    "_T4": {
+    "_TO_thd4": {
         "long_name": "Turnover threshold3",
         "description": "Turnover threshold to categorize companies by size",
         "itr_ref": "Tax Law",
@@ -99,7 +99,7 @@
         "out_of_range_maxmsg": "",
         "out_of_range_action": "stop"
     },
-"_T5": {
+"_TO_thd5": {
      "long_name": "Turnover threshold3",
      "description": "Turnover threshold to categorize companies by size",
      "itr_ref": "Tax Law",
@@ -124,7 +124,7 @@
      "out_of_range_maxmsg": "",
      "out_of_range_action": "stop"
  },
-"_A1": {
+"_Asset_thd1": {
       "long_name": "Asset threshold1",
       "description": "Asset threshold to categorize companies by size",
       "itr_ref": "Tax Law",
@@ -149,7 +149,7 @@
       "out_of_range_maxmsg": "",
       "out_of_range_action": "stop"
   },
-"_A2": {
+"_Asset_thd2": {
     "long_name": "Asset threshold2",
     "description": "Asset threshold to categorize companies by size",
     "itr_ref": "Tax Law",
@@ -174,7 +174,7 @@
     "out_of_range_maxmsg": "",
     "out_of_range_action": "stop"
 },
-"_A3": {
+"_Asset_thd3": {
       "long_name": "Asset threshold3",
       "description": "Asset threshold to categorize companies by size",
       "itr_ref": "Tax Law",
@@ -249,6 +249,7 @@
         "out_of_range_maxmsg": "",
         "out_of_range_action": "stop"
     },
+   
 "_rate_ded_charity": {
         "long_name": "Rate at which charitable contributions are capped as percentage of adjusted profit ",
         "description": "Rate to calculate maximum allowable charitable expenses",
@@ -316,7 +317,7 @@
      "value": [5],
      "range": {
          "min": 0,
-         "max": 9e+99
+         "max": 10
      },
      "out_of_range_minmsg": "",
      "out_of_range_maxmsg": "",
@@ -347,6 +348,31 @@
         "out_of_range_maxmsg": "",
         "out_of_range_action": "stop"
     },
+      "_mintax_rate": {
+          "long_name": "Minimum Tax Rate for taxpayers who do not maintain books",
+          "description": "Minimum Tax rate",
+          "itr_ref": "Tax Law",
+          "notes": "",
+          "row_var": "Year",
+          "row_label": [
+              "2022"
+          ],
+          "start_year": 2022,
+          "cpi_inflatable": false,
+          "cpi_inflated": false,
+          "col_var": "Value",
+          "col_label": ["Value"],
+          "boolean_value": false,
+          "integer_value": false,
+          "value": [0.01],
+          "range": {
+              "min": 0.0,
+              "max": 1.0
+          },
+          "out_of_range_minmsg": "",
+          "out_of_range_maxmsg": "",
+          "out_of_range_action": "stop"
+      },
   "_etax_rate1": {
       "long_name": "Excess Tax Rate 1",
       "description": "Exess Tax rate 1",
@@ -543,7 +569,7 @@
         "boolean_value": false,
         "integer_value": false,
         "value": [
-           500000
+           18e+6
         ],
         "range": {
             "min": 0,
@@ -598,7 +624,7 @@
         "boolean_value": false,
         "integer_value": false,
         "value": [
-           1250000
+           24e+6
         ],
         "range": {
             "min": "_tbrk1",
@@ -655,7 +681,7 @@
         "boolean_value": false,
         "integer_value": false,
         "value": [
-           8500000
+           102e+6
         ],
         "range": {
             "min": "_tbrk2",
@@ -712,7 +738,7 @@
         "boolean_value": false,
         "integer_value": false,
         "value": [
-                12500000
+                150e+6
         ],
         "range": {
             "min": "_tbrk3",
@@ -750,9 +776,9 @@
          "out_of_range_action": "stop"
          
      },
-  "_cit_rate_std": {
-        "long_name": "standard rate at which corporates are taxed",
-        "description": "Corporate Tax rate",
+  "_switch_prog": {
+        "long_name": "switch to use standard CIT rate / prog rate for sole prop ",
+        "description": "If switch is 1 rate if progressive; else rate is standard",
         "itr_ref": "Tax Law",
         "notes": "",
         "row_var": "Year",
@@ -766,7 +792,7 @@
         "col_label": ["Value"],
         "boolean_value": false,
         "integer_value": false,
-        "value": [0.2],
+        "value": [1],
         "range": {
             "min": 0.0,
             "max": 1.0
@@ -775,6 +801,31 @@
         "out_of_range_maxmsg": "",
         "out_of_range_action": "stop"
     },
+    "_cit_rate_std": {
+          "long_name": "standard rate at which corporates are taxed",
+          "description": "Corporate Tax rate",
+          "itr_ref": "Tax Law",
+          "notes": "",
+          "row_var": "Year",
+          "row_label": [
+              "2022"
+          ],
+          "start_year": 2022,
+          "cpi_inflatable": false,
+          "cpi_inflated": false,
+          "col_var": "Value",
+          "col_label": ["Value"],
+          "boolean_value": false,
+          "integer_value": false,
+          "value": [0.2],
+          "range": {
+              "min": 0.0,
+              "max": 1.0
+          },
+          "out_of_range_minmsg": "",
+          "out_of_range_maxmsg": "",
+          "out_of_range_action": "stop"
+      },
     "_cit_rate_std_curr_law": {
         "long_name": "standard rate at which corporates are taxed under current law",
         "description": "Corporate Tax rate - current law",
@@ -986,8 +1037,8 @@
         "notes": "",
         "row_var": "Year",
         "row_label": [
-                100000,
-                1000000,
+                1e7,
+                1e9,
                 9e99
         ],
         "start_year": 2022,

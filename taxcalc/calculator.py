@@ -369,8 +369,8 @@ class Calculator(object):
             cfdata = pd.read_csv(path)
             
             for i in range(1, self.max_lag_years+1):
-                setattr(self.__corprecords, 'Loss_lag'+str(i), cfdata['Loss_lag' + str(i)])
-            setattr(self.__corprecords, 'Op_wdv', cfdata['Op_wdv'])
+                setattr(self.__corprecords, 'Loss_lag'+str(i), cfdata['newloss' + str(i)])
+            setattr(self.__corprecords, 'Op_wdv', cfdata['Cl_wdv'])
             self.__corprecords.increment_year()
            
            
