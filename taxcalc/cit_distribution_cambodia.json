@@ -1,17 +1,17 @@
 {
   "DIST_VARIABLES": [
     "weight",
-    "net_accounting_profit",
+    "adjusted_profit",
     "citax"
   ],
   "DIST_TABLE_COLUMNS": [
     "weight",
-    "net_accounting_profit",
+    "adjusted_profit",
     "citax"
   ],
   "DIST_TABLE_LABELS": [
     "Returns",
-    "Accounting Profit",
+    "Adjusted accounting Profit",
     "Corporate Income Tax"
   ],
   "DECILE_ROW_NAMES": [
@@ -35,34 +35,34 @@
   "STANDARD_ROW_NAMES": [
     "<0",
     "=0",
-    "0-5m",
-    "5-10m",
-    "10-15m",
-    "15-20m",
-    "20-30m",
-    "30-40m",
-    "40-50m",
+    "0-50m",
     "50-100m",
-    "100-500m",
-    "500m-1bn",
-    ">1bn",
+    "100-250m",
+    "250-500m",
+    "500-750m",
+    "750m-1b",
+    "1-100b",
+    "100-250b",
+    "250-500b",
+    "500b-1t",
+    ">1t",
     "ALL"
   ],
   "STANDARD_INCOME_BINS": [
     -9e+99,
     -1e-09,
     1e-09,
-    5000000.0,
-    10000000.0,
-    15000000.0,
-    20000000.0,
-    30000000.0,
-    40000000.0,
-    50000000.0,
-    100000000.0,
-    500000000.0,
-    1000000000.0,
+    50e+6,
+    100e+6,
+    250e+6,
+    500e+6,
+    750e+6,
+    1e+9,
+    100e+9,
+    250e+9,
+    500e+9,
+    1e+12,
     9e+99
   ],
-  "income_measure": "net_accounting_profit"
+  "income_measure": "adjusted_profit"
 }

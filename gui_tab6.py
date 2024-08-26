@@ -95,7 +95,7 @@ def display_chart(self, event, global_vars):
     if (selected_chart==tax_type+'_revenue_projection'):
         df = pd.read_csv(selected_chart+'.csv', index_col=0)           
         df = df.T
-        print('df in chart is', df)
+        #print('df in chart is', df)
         if self.vars[tax_type+'_adjust_behavior']:
             df1=df[df.columns[:3]]
             df1.columns=['Current Law', 'Reform', 'Behavior']

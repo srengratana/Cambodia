@@ -33,7 +33,7 @@ def initialize_vars(self):
     self.reform={}
     self.selected_item = ""
     self.selected_value = ""
-    self.selected_year = 2022
+    self.selected_year = 2024
     self.sub_directory = "taxcalc"
     self.year_list = [2022, 2023, 2024, 2025, 2026, 2027]
     #self.year_list = [2023, 2024, 2025, 2026, 2027]
@@ -130,7 +130,7 @@ def initialize_vars(self):
     
     self.vars['kakwani_list'] = []
     
-    self.vars['start_year'] = 2022   #this may be different from the start year in globalvars.json which gets updated separately
+    self.vars['start_year'] = 2024   #this may be different from the start year in globalvars.json which gets updated separately
     self.vars['end_year']=2027
     self.vars['pit_data_start_year'] = 2021
     self.vars['cit_data_start_year'] = 2022
@@ -264,7 +264,7 @@ def display_entry(self, widget, tax_type):
             
             self.vars['DEFAULTS_FILENAME'] = "current_law_policy_cit_cambodia.json"    
             self.vars['GROWFACTORS_FILENAME'] = "growfactors_cit_cambodia.csv"
-            self.vars['start_year'] = 2022
+            self.vars['start_year'] = 2024
             self.vars['data_start_year'] = 2022
             self.vars['SALARY_VARIABLE'] = "SALARY"
             self.vars['cit_id_var'] = 'id_n'
