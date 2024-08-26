@@ -77,6 +77,24 @@
       "cross_year": "No",
       "attribute": "No"
     },
+     "Spl_depr_flag": {
+       "type": "int",
+       "desc": "Whether Qualified Investment Project is eligible to claim spl depreciation",
+       "form": {
+         "2022": "private info"
+       },
+       "cross_year": "No",
+       "attribute": "No"
+     },
+       "mintax_flag": {
+         "type": "int",
+         "desc": "Whether Qualified Investment Project is eligible to claim spl depreciation",
+         "form": {
+           "2022": "private info"
+         },
+         "cross_year": "No",
+         "attribute": "No"
+       },
     "Legal_form": {
       "type": "int",
       "desc": "Legal form - Prop., Pvt Ltd, LLC",
@@ -275,6 +293,15 @@
       "cross_year": "No",
       "attribute": "No"
     },
+      "depr": {
+        "type": "float",
+        "desc": "Depreciation reported by taxpayer",
+        "form": {
+          "2022": "Field g3 - Form TOI 01"
+        },
+        "cross_year": "No",
+        "attribute": "No"
+      },
     "accum_inc": {
       "type": "float",
       "desc": "Accumulated income - mining companies",

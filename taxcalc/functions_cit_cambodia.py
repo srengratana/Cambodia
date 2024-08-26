@@ -48,7 +48,7 @@ def Sector(Sector_short, sector):
     return sector
 
 @iterate_jit(nopython=True)
-def Firm_size(T1, A1, T2, A2, T3, T4, T5, A3, sector, Turnover, Total_assets, size):
+def Firm_size(TO_thd1, Asset_thd1, TO_thd2, Asset_thd2, TO_thd3, TO_thd4, TO_thd5, Asset_thd3, sector, Turnover, Total_assets, size):
     """
       
     Compute size of firm based on turnover and assets threshold
@@ -62,6 +62,7 @@ def Firm_size(T1, A1, T2, A2, T3, T4, T5, A3, sector, Turnover, Total_assets, si
     Manuf   >T4 (8bn)    >A3 (4bn)   T5 (1.6bn) < TO <= T4 (8bn)  A1 (2bn) < A <= A3 (4bn)
     
     """
+    (T1, A1, T2, A2, T3, T4, T5, A3)  = (TO_thd1, Asset_thd1, TO_thd2, Asset_thd2, TO_thd3, TO_thd4, TO_thd5, Asset_thd3)
     if sector == 1:
         if Turnover > T1 or Total_assets > A1:
             size = 2
@@ -110,11 +111,11 @@ def Normal_depr_base(Op_wdv, Add_assets, Dispose_assets, normal_depr_base):
 
 
 @iterate_jit(nopython=True)
-def Normal_depr(normal_depr_base, depr_rate, normal_depr):
+def Normal_depr(normal_depr_base, depr, depr_rate, normal_depr):
     """
     Return the depreciation for each asset class.
     """
-    normal_depr = normal_depr_base * depr_rate
+    normal_depr = max(normal_depr_base * depr_rate, depr)
     return normal_depr
 
 '''
@@ -133,11 +134,14 @@ def Spl_depr_base(Add_assets_spl, spl_depr_base):
     return spl_depr_base
 
 @iterate_jit(nopython=True)
-def Spl_depr(spl_depr_base, spl_depr_rate, spl_depr):
+def Spl_depr(spl_depr_rate, Spl_depr_flag, spl_depr_base, spl_depr):
     """
     Return the special depreciation
     """
-    spl_depr = spl_depr_base * spl_depr_rate
+    if Spl_depr_flag == 1:
+        spl_depr = spl_depr_base * spl_depr_rate
+    else:
+        spl_depr = 0
     return spl_depr
 
 
@@ -317,12 +321,13 @@ def Taxable_profit_after_adjloss(profit_after_int, loss_cf_limit, Loss_lag1,
         (newloss1, newloss2, newloss3, newloss4, newloss5,
           newloss6, newloss7, newloss8, newloss9, newloss10) = np.zeros(10)
         net_taxable_profit = profit_after_int
+        Used_loss_total = Used_loss.sum()
     else:
         BF_loss = BF_loss[:N]
                 
         if profit_after_int < 0:
             CYL = abs(profit_after_int)
-        
+                    
         elif profit_after_int >= 0:
             CYL = 0
             Cum_used_loss = 0
@@ -330,7 +335,11 @@ def Taxable_profit_after_adjloss(profit_after_int, loss_cf_limit, Loss_lag1,
                 GTI = profit_after_int - Cum_used_loss
                 Used_loss[i-1] = min(BF_loss[i-1], GTI)
                 Cum_used_loss += Used_loss[i-1]
-            
+            # for i in range(N):
+            #     GTI = profit_after_int - Cum_used_loss
+            #     Used_loss[i] = min(BF_loss[i], GTI)
+            #     Cum_used_loss += Used_loss[i]
+        
         New_loss = BF_loss - Used_loss
         Used_loss_total = Used_loss.sum()
         net_taxable_profit = profit_after_int - Used_loss_total
@@ -351,7 +360,7 @@ def Net_tax_base_behavior(cit_rate_std, cit_rate_std_curr_law, cit_rate_mining, 
     """
     Compute net taxable profits afer allowing behavioral adjustments based on elasticity
     """
-    NP = net_taxable_profit
+    NP = max(net_taxable_profit, 0)
     elasticity_taxable_income_threshold0 = elasticity_cit_taxable_income_threshold[0]
     elasticity_taxable_income_threshold1 = elasticity_cit_taxable_income_threshold[1]
     #elasticity_taxable_income_threshold2 = elasticity_cit_taxable_income_threshold[2]
@@ -360,11 +369,11 @@ def Net_tax_base_behavior(cit_rate_std, cit_rate_std_curr_law, cit_rate_mining, 
     elasticity_taxable_income_value2=elasticity_cit_taxable_income_value[2]
     if NP<=0:
         elasticity=0
-    elif NP<elasticity_taxable_income_threshold0:
+    elif NP>0 and NP<=elasticity_taxable_income_threshold0:
         elasticity=elasticity_taxable_income_value0
-    elif NP<elasticity_taxable_income_threshold1:
+    elif NP>elasticity_taxable_income_threshold0 and NP<=elasticity_taxable_income_threshold1:
         elasticity=elasticity_taxable_income_value1
-    else:
+    elif NP>elasticity_taxable_income_threshold1:
         elasticity=elasticity_taxable_income_value2
     
     
@@ -437,30 +446,40 @@ Calculation of corprate tax
 '''
 
 @iterate_jit(nopython=True)
-def cit_liability(net_tax_base_behavior, excess_tax, sector, size, Legal_form, QIP_flag, cit_rate_std, cit_rate_mining, 
-                  cit_rate_insurance, cit_rate_qip, cit_rate1, cit_rate2, cit_rate3, cit_rate4,
-                  cit_rate5, tbrk1, tbrk2, tbrk3, tbrk4, MAT, citax):
+def cit_liability(net_tax_base_behavior, excess_tax, sector, size, Legal_form, QIP_flag, mintax_flag, Turnover, 
+                  cit_rate_std, cit_rate_mining, switch_prog, cit_rate_insurance, cit_rate_qip, cit_rate1, 
+                  cit_rate2, cit_rate3, cit_rate4, cit_rate5, tbrk1, tbrk2, tbrk3, tbrk4, MAT, mintax_rate, citax):
     """
     Compute tax liability given the corporate rate
     """
     # subtract TI_special_rates from TTI to get Aggregate_Income, which is
     # the portion of TTI that is taxed at normal rates
-    if (Legal_form == 1):
-       citax = (cit_rate1 * min(net_tax_base_behavior, tbrk1) + 
-                cit_rate2 * min(tbrk2 - tbrk1, max(0., net_tax_base_behavior - tbrk1)) +
-                cit_rate3 * min(tbrk3 - tbrk2, max(0., net_tax_base_behavior - tbrk2)) +
-                cit_rate4 * min(tbrk4 - tbrk3, max(0., net_tax_base_behavior - tbrk3)) +
-                cit_rate5 * max(0., net_tax_base_behavior - tbrk4))
-    elif sector == 4:
-        citax = cit_rate_mining * max(net_tax_base_behavior, 0) + excess_tax
-    elif sector == 5:
-        citax = cit_rate_insurance * max(net_tax_base_behavior, 0)
-    elif QIP_flag == 1:
-         citax = cit_rate_qip * max(net_tax_base_behavior, 0)
+    if net_tax_base_behavior <= 0:
+        citax = 0
     else:
-        citax = cit_rate_std * max(net_tax_base_behavior, 0)
+        if (Legal_form == 1):
+           citax = ((cit_rate1 * min(net_tax_base_behavior, tbrk1) + 
+                    cit_rate2 * min(tbrk2 - tbrk1, max(0., net_tax_base_behavior - tbrk1)) +
+                    cit_rate3 * min(tbrk3 - tbrk2, max(0., net_tax_base_behavior - tbrk2)) +
+                    cit_rate4 * min(tbrk4 - tbrk3, max(0., net_tax_base_behavior - tbrk3)) +
+                    cit_rate5 * max(0., net_tax_base_behavior - tbrk4)))*(switch_prog) + net_tax_base_behavior*cit_rate_std*(1-switch_prog)
+        elif sector == 4:
+            citax = cit_rate_mining * max(net_tax_base_behavior, 0) + excess_tax
+        elif sector == 5:
+            citax = cit_rate_insurance * max(net_tax_base_behavior, 0)
+        elif QIP_flag == 1:
+            citax = cit_rate_qip * max(net_tax_base_behavior, 0)
+        else:
+            citax = cit_rate_std * max(net_tax_base_behavior, 0)
         
-    citax = max(citax, MAT)
+    mintax = max(Turnover, 0) * mintax_rate
+    
+    if mintax_flag == 1:
+        #citax = max(citax, mintax)
+        citax = citax
+    else:
+        citax = max(citax, MAT)
+        #citax = citax
     return citax
 
 
