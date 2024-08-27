@@ -398,15 +398,6 @@ def Net_tax_base_behavior(cit_rate_std, cit_rate_std_curr_law, cit_rate_mining, 
     return net_tax_base_behavior
 
 
-@iterate_jit(nopython=True)
-def mat_liability(mat_rate, Turnover, MAT):
-    """
-    Compute minimum alternate tax liability as a percentage of Turnover
-    """
-    # subtract TI_special_rates from TTI to get Aggregate_Income, which is
-    # the portion of TTI that is taxed at normal rates
-    MAT = mat_rate*Turnover
-    return MAT
 
 '''
 -------------------------------------------------------------------------------------
@@ -448,7 +439,7 @@ Calculation of corprate tax
 @iterate_jit(nopython=True)
 def cit_liability(net_tax_base_behavior, excess_tax, sector, size, Legal_form, QIP_flag, mintax_flag, Turnover, 
                   cit_rate_std, cit_rate_mining, switch_prog, cit_rate_insurance, cit_rate_qip, cit_rate1, 
-                  cit_rate2, cit_rate3, cit_rate4, cit_rate5, tbrk1, tbrk2, tbrk3, tbrk4, MAT, mintax_rate, citax):
+                  cit_rate2, cit_rate3, cit_rate4, cit_rate5, tbrk1, tbrk2, tbrk3, tbrk4, mintax_rate, citax):
     """
     Compute tax liability given the corporate rate
     """
@@ -472,16 +463,20 @@ def cit_liability(net_tax_base_behavior, excess_tax, sector, size, Legal_form, Q
         else:
             citax = cit_rate_std * max(net_tax_base_behavior, 0)
         
-    mintax = max(Turnover, 0) * mintax_rate
-    
-    if mintax_flag == 1:
-        #citax = max(citax, mintax)
-        citax = citax
-    else:
-        citax = max(citax, MAT)
-        #citax = citax
     return citax
 
 
+
+
+
+
+# mintax = max(Turnover, 0) * mintax_rate
+
+# if mintax_flag == 1:
+#     #citax = max(citax, mintax)
+#     citax = citax
+# else:
+#     citax = max(citax, MAT)
+#     #citax = citax
 
 

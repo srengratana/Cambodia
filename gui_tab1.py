@@ -424,7 +424,7 @@ def tab1(self):
     self.vars['cit'] = 0
     self.vars['vat'] = 0
     
-    self.status['pit'] = tk.NORMAL
+    self.status['pit'] = tk.DISABLED
     self.status['cit'] = tk.NORMAL
     #self.status['vat'] = tk.NORMAL
     self.status['vat'] = tk.DISABLED
