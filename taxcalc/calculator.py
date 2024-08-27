@@ -633,7 +633,8 @@ class Calculator(object):
                 if tax_type == 'pit':
                     wtd_total_tax[attribute_value] = (tax_data * self.array('weight') * attribute_bool).sum()
                 elif tax_type == 'cit':
-                    wtd_total_tax[attribute_value] = (tax_data * self.carray('weight') * attribute_bool).sum()     
+                    wtd_total_tax[str(attribute_value)] = (tax_data * self.carray('weight') * attribute_bool).sum()
+                    #wtd_total_tax[attribute_value] = (tax_data * self.carray('weight') * attribute_bool).sum() 
         #print(wtd_total_cit)
         return wtd_total_tax
             

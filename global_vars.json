@@ -44,7 +44,7 @@
   "vat_display_distribution_table_bydecile": 0,
   "vat_display_revenue_table": 1,
   "kakwani_list": [],
-  "start_year": "2022",
+  "start_year": "2024",
   "end_year": "2027",
   "pit_data_start_year": 2021,
   "cit_data_start_year": 2022,
@@ -60,13 +60,11 @@
     "2029": 206471.0,
     "2030": 218838.0
   },
-  "percent_gdp": 0,
-  "SALARY_VARIABLE": "Oper_rev",
+  "percent_gdp": 1,
+  "SALARY_VARIABLE": "SALARY",
   "vat_id_var": "id_n",
-  "charts_ready": 1,
-  "chart_list": [
-    "cit_revenue_projection"
-  ],
+  "charts_ready": 0,
+  "chart_list": [],
   "show_error_log": 0,
   "verbose": 0,
   "pit": 0,
@@ -75,7 +73,9 @@
   "data_start_year": 2022,
   "cit_id_var": "id_n",
   "cit_functions_names_filename": "function_names_cit_cambodia.json",
-  "attribute_vars": [],
+  "attribute_vars": [
+    "Sector_short"
+  ],
   "cit_distribution_table": 0,
   "pit_adjust_behavior": 0,
   "cit_adjust_behavior": 0,

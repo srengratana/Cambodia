@@ -658,7 +658,7 @@ def generate_policy_revenues():
         #print('dt', dt)
         return dt 
         
-    
+    print('revenue_dict', revenue_dict)
     with open('revenue_dict.json', 'w') as f:
         json.dump(revenue_dict, f)
     #save the results of each tax type in separate files
