@@ -819,7 +819,7 @@ def generate_policy_revenues():
             chart_list = chart_list + [tax_type+'_distribution_table']
             chart_list = chart_list + [tax_type+'_distribution_table_top1']
             chart_list = chart_list + [tax_type+'_distribution_table_income_bins']
-            chart_list = chart_list + [tax_type+'_distribution_table_sector']
+            #chart_list = chart_list + [tax_type+'_distribution_table_sector']
             chart_list = chart_list + [tax_type+'_etr']
             #global_variables['kakwani_list'+tax_type] = kakwani_list[tax_type]
             global_variables['kakwani_list'] = kakwani_list

@@ -20,7 +20,6 @@
   "18": "Profit_after_int",
   "19": "Taxable_profit_after_adjloss",
   "20": "Net_tax_base_behavior",
-  "21": "mat_liability",
-  "22": "Excess_tax",
-  "23": "cit_liability"
+  "21": "Excess_tax",
+  "22": "cit_liability"
 }

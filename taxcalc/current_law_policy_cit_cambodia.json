@@ -323,32 +323,7 @@
      "out_of_range_maxmsg": "",
      "out_of_range_action": "stop"
  },
-    "_mat_rate": {
-        "long_name": "Minimum Alternative Tax Rate",
-        "description": "Minimum Alternative Tax rate",
-        "itr_ref": "Tax Law",
-        "notes": "",
-        "row_var": "Year",
-        "row_label": [
-            "2022"
-        ],
-        "start_year": 2022,
-        "cpi_inflatable": false,
-        "cpi_inflated": false,
-        "col_var": "Value",
-        "col_label": ["Value"],
-        "boolean_value": false,
-        "integer_value": false,
-        "value": [0.0],
-        "range": {
-            "min": 0.0,
-            "max": 1.0
-        },
-        "out_of_range_minmsg": "",
-        "out_of_range_maxmsg": "",
-        "out_of_range_action": "stop"
-    },
-      "_mintax_rate": {
+   "_mintax_rate": {
           "long_name": "Minimum Tax Rate for taxpayers who do not maintain books",
           "description": "Minimum Tax rate",
           "itr_ref": "Tax Law",

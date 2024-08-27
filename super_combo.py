@@ -318,7 +318,7 @@ class super_combo(tk.Frame):
             self.input_json = self.input_json_main
 
         input_json_sorted = dict(sorted(self.input_json.items()))
-        print('input json', input_json_sorted)
+        #print('input json', input_json_sorted)
 
         policy_options_list = []
         for k, s in input_json_sorted.items(): 

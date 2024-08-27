@@ -64,7 +64,7 @@ def tab6(self):
                                     value=chart_list, font=self.text_font)
     #chart_combo.current(0)
     self.chart_combo.place(relx = self.combo_1_TAB6_x, 
-                    rely = self.combo_1_TAB6_y, anchor = "w", width=150)
+                    rely = self.combo_1_TAB6_y, anchor = "w", width=250)
     
     f = open('global_vars.json')
     global_vars = json.load(f)
@@ -79,7 +79,7 @@ def display_chart(self, event, global_vars):
         
     self.image = ImageTk.PhotoImage(Image.open("blank.png"))
     self.pic = tk.Label(self.TAB6,image=self.image)
-    self.pic.place(relx = 0.20, rely = 0.1, anchor = "nw")
+    self.pic.place(relx = 0.30, rely = 0.1, anchor = "nw")
     
     #self.selected_attribute_chart = self.attribute_selection.get()
     selected_chart = self.chart_selection.get()
@@ -121,7 +121,7 @@ def display_chart(self, event, global_vars):
         plt.savefig(pic_filename1)
         self.image = ImageTk.PhotoImage(Image.open("rev_forecast.png"))
         self.pic = tk.Label(self.TAB6,image=self.image)
-        self.pic.place(relx = 0.20, rely = 0.1, anchor = "nw")
+        self.pic.place(relx = 0.4, rely = 0.1, anchor = "nw")
         self.pic.image = self.image             
     elif (selected_chart==tax_type+'_distribution_table'):
         df = pd.read_csv(selected_chart+'.csv', thousands=',') 
@@ -140,7 +140,7 @@ def display_chart(self, event, global_vars):
         plt.savefig(pic_filename1)
         self.image = ImageTk.PhotoImage(Image.open("distribution_chart.png"))
         self.pic = tk.Label(self.TAB6,image=self.image)
-        self.pic.place(relx = 0.20, rely = 0.1, anchor = "nw")
+        self.pic.place(relx = 0.4, rely = 0.1, anchor = "nw")
         self.pic.image = self.image
     
     elif (selected_chart==tax_type+'_distribution_table_top1'):
@@ -159,7 +159,7 @@ def display_chart(self, event, global_vars):
         plt.savefig(pic_filename1)
         self.image = ImageTk.PhotoImage(Image.open("distribution_chart_top.png"))
         self.pic = tk.Label(self.TAB6,image=self.image)
-        self.pic.place(relx = 0.20, rely = 0.1, anchor = "nw")
+        self.pic.place(relx = 0.4, rely = 0.1, anchor = "nw")
         self.pic.image = self.image
     
     elif (selected_chart==tax_type+'_distribution_table_income_bins'):
@@ -214,7 +214,7 @@ def display_chart(self, event, global_vars):
         plt.savefig(pic_filename1)
         self.image = ImageTk.PhotoImage(Image.open("tax_contribution.png"))
         self.pic = tk.Label(self.TAB6,image=self.image)
-        self.pic.place(relx = 0.20, rely = 0.1, anchor = "nw")
+        self.pic.place(relx = 0.4, rely = 0.1, anchor = "nw")
         self.pic.image = self.image
         
     elif (selected_chart==tax_type+'_etr'):        
@@ -260,7 +260,7 @@ def display_chart(self, event, global_vars):
         plt.savefig(pic_filename1)
         self.image = ImageTk.PhotoImage(Image.open("etr.png"))
         self.pic = tk.Label(self.TAB6,image=self.image)
-        self.pic.place(relx = 0.20, rely = 0.1, anchor = "nw")
+        self.pic.place(relx = 0.4, rely = 0.1, anchor = "nw")
         self.pic.image = self.image       
     
 def get_attribute_selection(self, event):
