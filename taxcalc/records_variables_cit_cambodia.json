@@ -38,7 +38,7 @@
         "2022": "private info"
       },
       "cross_year": "No",
-      "attribute": "No"
+      "attribute": "Yes"
     },    
     "sector_code": {
       "required": false,

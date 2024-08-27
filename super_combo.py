@@ -63,7 +63,7 @@ class super_combo(tk.Frame):
         shift_y = 0
         font="Courier New"
         self.widget_placement(shift_x, shift_y, self.width_json)
-        self.fontStyle = tkfont.Font(family=font, size="14")
+        self.fontStyle = tkfont.Font(family=font, size="12")
         self.fontStyle_sub_title = tkfont.Font(family=font, size="16", weight="bold")         
         self.fontStyle_title = tkfont.Font(family=font, size="18", weight="bold")
         self.s = ttk.Style()
@@ -83,7 +83,7 @@ class super_combo(tk.Frame):
         self.combo_label_gap_x = 0.02
         self.entry_entry_gap_x = 0.02
         self.entry_1_width_x = 0.03
-        self.entry_2_width_x = 0.04
+        self.entry_2_width_x = 0.03
         self.entry_entry_gap_y = 0.03
         self.combo_combo_gap_y = 0.03
         self.combo_button_gap_y = 0.06
@@ -100,7 +100,7 @@ class super_combo(tk.Frame):
             self.entry_2_label_y = self.entry_1_label_y
             self.entry_2_x = self.entry_2_label_x
             self.entry_2_y = self.entry_1_y        
-            self.plus_button_x = self.entry_2_x + self.entry_2_width_x + self.entry_entry_gap_x
+            self.plus_button_x = self.entry_2_x + self.entry_2_width_x + 5*self.entry_entry_gap_x
             self.plus_button_y = self.entry_1_y
             self.minus_button_x = self.plus_button_x + self.entry_entry_gap_x
             self.minus_button_y = self.entry_1_y
@@ -111,13 +111,14 @@ class super_combo(tk.Frame):
         else:
             self.entry_1_label_x = self.combo_x + self.combo_width_x + self.combo_label_gap_x
             self.entry_1_label_y = self.combo_y
-            self.entry_1_x = self.entry_1_label_x + self.label_width_x
+            #set position of entry label e.g. on Tab3 position of entry tab for Threshold
+            self.entry_1_x = self.entry_1_label_x + 2*self.label_width_x
             self.entry_1_y = self.combo_y          
             self.entry_2_label_x = self.entry_1_label_x
             self.entry_2_label_y = self.entry_1_label_y + self.combo_combo_gap_y
             self.entry_2_x = self.entry_1_x
             self.entry_2_y = self.entry_1_y + self.combo_combo_gap_y          
-            self.plus_button_x = self.entry_1_x + width*(max(self.entry_1_width_x,self.entry_2_width_x) + self.entry_entry_gap_x)
+            self.plus_button_x = self.entry_1_x + width*(max(self.entry_1_width_x,self.entry_2_width_x) + 2*self.entry_entry_gap_x)
             self.plus_button_y = self.entry_1_y
             self.minus_button_x = self.plus_button_x + self.entry_entry_gap_x
             self.minus_button_y = self.entry_1_y
@@ -469,8 +470,7 @@ class super_combo(tk.Frame):
         else:
             self.l4[1]=tk.Label(tab,text="Year: ", font = self.fontStyle)
         
-        self.l4[1].place(relx = self.entry_1_label_x, 
-                 rely = self.entry_1_label_y, anchor = "w")
+        self.l4[1].place(relx = self.entry_1_label_x, rely = self.entry_1_label_y, anchor = "w")
         #print('Year: ', round(self.entry_1_label_x,2), self.entry_1_label_y)
         self.block_widget_dict[1][2] = {}
 
@@ -506,7 +506,7 @@ class super_combo(tk.Frame):
         year = start_year        
         for i in range(self.width_json):
             if (year <= end_year):            
-                self.block_widget_dict[1][3][i] = tk.Entry(tab, width=10, font = self.fontStyle)
+                self.block_widget_dict[1][3][i] = tk.Entry(tab, width=15, font = self.fontStyle)
                 if (self.width_json==1):          
                     self.block_widget_dict[1][3][i].place(relx = self.entry_2_x, rely = self.entry_2_y, anchor = "w")               
                 else:
@@ -538,7 +538,7 @@ class super_combo(tk.Frame):
         self.button_generate_revenue_policy = ttk.Button(tab, text = "Generate Revenue under Reform", style='my.TButton')
         #self.button_generate_revenue_policy = ttk.Button(tab, text = "Generate Revenue under Reform", style='my.TButton', command=self.clicked_generate_policy_revenues)
         self.button_generate_revenue_policy.place(relx = self.generate_revenue_policy_button_x,
-                                                    rely = self.generate_revenue_policy_button_y, anchor = "w")       
+                                                    rely = 1.2*self.generate_revenue_policy_button_y, anchor = "w")       
         
         self.image1 = Image.open("world_bank.png")
         self.image2 = self.image1.resize((700, 400), Image.ANTIALIAS)

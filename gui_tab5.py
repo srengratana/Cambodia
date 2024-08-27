@@ -48,13 +48,13 @@ def display_distribution(self, widget, tax_type, block_1_title_pos_x):
                      font = self.fontStyle_sub_title)
             self.l1_distribution[tax_type].place(relx = self.block_1_title_pos_x, rely = self.block_1_title_pos_y, anchor = "w")
             
-            self.entry_distribution_json_filename[tax_type] = Entry(self.TAB5, width=30, font = self.fontStyle)
-            self.entry_distribution_json_filename[tax_type].place(relx = self.block_1_entry_x, 
+            self.entry_distribution_json_filename[tax_type] = Entry(self.TAB5, width=35, font = self.fontStyle)
+            self.entry_distribution_json_filename[tax_type].place(relx = 1.3*self.block_1_entry_x, 
                                       rely = self.block_1_entry_1_y,
                                       anchor = "e")
             self.entry_distribution_json_filename[tax_type].insert(END, self.vars[tax_type+'_distribution_json_filename'])
             self.button_distribution_json_filename[tax_type] = ttk.Button(self.TAB5, text = "Change Distribution Inputs File", style='my.TButton', command=lambda: self.input_entry_data(self.entry_distribution_json_filename[tax_type], tax_type+'_distribution_json_filename'))
-            self.button_distribution_json_filename[tax_type].place(relx = self.block_1_entry_x,
+            self.button_distribution_json_filename[tax_type].place(relx = 1.35*self.block_1_entry_x,
                                        rely = self.block_1_entry_1_y, anchor = "w")
 
             self.display_distribution_table_attr_chk[tax_type] = tk.IntVar()
