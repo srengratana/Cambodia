@@ -1037,9 +1037,9 @@
         "notes": "",
         "row_var": "Year",
         "row_label": [
-                1e7,
-                1e9,
-                9e99
+                "Ten million",
+                "One billion",
+                "Over One billion"
         ],
         "start_year": 2022,
         "cpi_inflatable": false,
@@ -1050,14 +1050,14 @@
         "integer_value": false,
         "value": [      
                 [
-                100000,
-                1000000,
-                9e99
+                1e+7,
+                1e+9,
+                9e+99
                 ]
       ],
         "range": {
             "min": 0,
-            "max": 9e99
+            "max": 9e+99
         },
         "out_of_range_minmsg": "",
         "out_of_range_maxmsg": "",

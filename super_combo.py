@@ -64,6 +64,7 @@ class super_combo(tk.Frame):
         font="Courier New"
         self.widget_placement(shift_x, shift_y, self.width_json)
         self.fontStyle = tkfont.Font(family=font, size="12")
+        self.fontStyle1 = tkfont.Font(family=font, size="10")
         self.fontStyle_sub_title = tkfont.Font(family=font, size="16", weight="bold")         
         self.fontStyle_title = tkfont.Font(family=font, size="18", weight="bold")
         self.s = ttk.Style()
@@ -367,7 +368,7 @@ class super_combo(tk.Frame):
 
         if self.attribute_value is not None:
             self.attribute_value = self.selected_attribute_widget.get()
-            self.input_json=self.input_json_main[self.attribute_value]      
+            self.input_json=self.input_json_main[int(self.attribute_value)]      
         selected_item = widget_dict[num][1].get()
 
         #print('vars ',vars)

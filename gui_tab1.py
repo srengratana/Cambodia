@@ -85,7 +85,7 @@ def initialize_vars(self):
     
 
     self.vars['DEFAULTS_FILENAME'] = "current_law_policy_cit_cambodia.json" 
-    self.vars['GROWFACTORS_FILENAME'] = "growfactors_cit_cambodia.csv"
+    self.vars['GROWFACTORS_FILENAME'] = "growfactors_cit_cambodia_alt.csv"
     self.vars['cit_data_filename'] = "cit_data_cambodia.csv"
     self.vars['cit_weights_filename'] = "cit_weights_cambodia.csv"
     self.vars['cit_records_variables_filename'] = "records_variables_cit_cambodia.json"    
