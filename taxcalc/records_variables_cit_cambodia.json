@@ -293,7 +293,7 @@
       "cross_year": "No",
       "attribute": "No"
     },
-      "depr": {
+      "rent_inc": {
         "type": "float",
         "desc": "Depreciation reported by taxpayer",
         "form": {
@@ -302,6 +302,24 @@
         "cross_year": "No",
         "attribute": "No"
       },
+        "int_inc": {
+          "type": "float",
+          "desc": "Interest income",
+          "form": {
+            "2022": "Field g3 - Form TOI 01"
+          },
+          "cross_year": "No",
+          "attribute": "No"
+        },
+          "depr": {
+            "type": "float",
+            "desc": "Depreciation reported by taxpayer",
+            "form": {
+              "2022": "Field g3 - Form TOI 01"
+            },
+            "cross_year": "No",
+            "attribute": "No"
+          },
     "accum_inc": {
       "type": "float",
       "desc": "Accumulated income - mining companies",
